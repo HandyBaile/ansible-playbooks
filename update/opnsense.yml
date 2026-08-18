@@ -6,6 +6,8 @@
     oxlorg.opnsense.system:
       action: 'update'
       firewall: "{{ ansible_host }}"
+      api_key: "{{ firewall_key }}"
+      api_secret: "{{ firewall_secret }}"
   - name: Upgrade
     oxlorg.opnsense.system:
       action: 'upgrade'
