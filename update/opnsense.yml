@@ -1,0 +1,10 @@
+- name: update-opnsense
+  hosts: all
+  tasks:
+    - name: Update
+      oxlorg.opnsense.system:
+        action: update
+
+    - name: Reboot
+      oxlorg.opnsense.system:
+        action: reboot

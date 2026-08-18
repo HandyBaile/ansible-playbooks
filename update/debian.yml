@@ -1,0 +1,16 @@
+- name: update-debian
+  hosts: all
+  become: yes
+  tasks:
+    - name: Update cache
+      apt:
+        update_cache: yes
+
+    - name: Upgrade
+      apt:
+        upgrade: dist
+
+    - name: Remove unused
+      apt:
+        autoremove: yes
+        purge: yes
