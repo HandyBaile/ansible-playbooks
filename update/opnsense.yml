@@ -3,7 +3,9 @@
   become: true
   tasks:
   - name: Update
-    ansible.builtin.shell: pkg update
-
+    oxlorg.opnsense.system:
+      action: 'update'
+      
   - name: Upgrade
-    ansible.builtin.shell: pkg upgrade -y
+    oxlorg.opnsense.system:
+      action: 'upgrade'
