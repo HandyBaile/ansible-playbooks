@@ -1,6 +1,6 @@
 - name: update-debian
   hosts: debian
-  become: yes
+  become: true
   tasks:
     - name: Update cache
       apt:

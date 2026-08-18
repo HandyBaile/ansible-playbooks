@@ -1,5 +1,6 @@
 - name: update-opnsense
   hosts: opnsense
+  become: true
   tasks:
   - name: Update
     ansible.builtin.shell: pkg update
