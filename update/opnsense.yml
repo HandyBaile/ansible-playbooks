@@ -10,3 +10,5 @@
     oxlorg.opnsense.system:
       action: 'upgrade'
       firewall: "{{ ansible_host }}"
+      api_key: "{{ firewall.key }}"
+      api_secret: "{{ firewall.secret }}"
