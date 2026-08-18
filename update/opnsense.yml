@@ -1,10 +1,8 @@
 - name: update-opnsense
   hosts: opnsense
   tasks:
-    - name: Update
-      oxlorg.opnsense.system:
-        action: update
+  - name: Update
+    ansible.builtin.shell: pkg update
 
-    - name: Reboot
-      oxlorg.opnsense.system:
-        action: reboot
+  - name: Upgrade
+    ansible.builtin.shell: pkg upgrade -y
