@@ -1,0 +1,49 @@
+---
+- name: Update all Docker Compose projects except Semaphore
+  hosts: docker_hosts
+  become: true
+  gather_facts: false
+
+  tasks:
+    - name: Find Docker Composes
+      ansible.builtin.find:
+        paths:
+          - /opt
+          - /srv
+          - /home
+        patterns:
+          - "compose.yml"
+          - "compose.yaml"
+          - "docker-compose.yml"
+          - "docker-compose.yaml"
+        recurse: true
+        file_type: file
+      register: compose_files
+
+    - name: Exclude Semaphore
+      ansible.builtin.set_fact:
+        compose_projects: >-
+          {{
+            compose_files.files
+            | map(attribute='path')
+            | map('dirname')
+            | reject('search', '/semaphore/')
+            | unique
+            | list
+          }}
+
+    - name: Pull latest images
+      ansible.builtin.command:
+        cmd: docker compose pull
+        chdir: "{{ item }}"
+      loop: "{{ compose_projects }}"
+      loop_control:
+        label: "{{ item }}"
+
+    - name: Recreate Compose projects
+      ansible.builtin.command:
+        cmd: docker compose up -d --build --remove-orphans
+        chdir: "{{ item }}"
+      loop: "{{ compose_projects }}"
+      loop_control:
+        label: "{{ item }}"
