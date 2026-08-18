@@ -1,5 +1,5 @@
 - name: update-opnsense
-  hosts: all
+  hosts: opnsense
   tasks:
     - name: Update
       oxlorg.opnsense.system:
