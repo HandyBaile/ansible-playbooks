@@ -1,7 +1,11 @@
 - name: update-opnsense
   hosts: opnsense
   become: true
+  vars:
+    firewall_key: "{{ lookup('env', 'firewall_key') }}"
+    firewall_secret: "{{ lookup('env', 'firewall_secret') }}"
   tasks:
+  
   - name: Update
     oxlorg.opnsense.system:
       action: 'update'
