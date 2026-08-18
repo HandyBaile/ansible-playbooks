@@ -5,7 +5,8 @@
   - name: Update
     oxlorg.opnsense.system:
       action: 'update'
-      
+      firewall: "{{ ansible_host }}"
   - name: Upgrade
     oxlorg.opnsense.system:
       action: 'upgrade'
+      firewall: "{{ ansible_host }}"
