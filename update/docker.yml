@@ -1,8 +1,7 @@
 ---
-- name: Update all Docker Compose projects except Semaphore
-  hosts: docker_hosts
+- name: update-docker
+  hosts: docker
   become: true
-  gather_facts: false
 
   tasks:
     - name: Find Docker Composes
